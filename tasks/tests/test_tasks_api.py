@@ -91,6 +91,6 @@ def test_user_cannot_create_task_without_title(authenticated_client):
         format='json'
     )
 
-    assert response.status_code == 999
+    assert response.status_code == 400
 
     assert 'title' in response.data
