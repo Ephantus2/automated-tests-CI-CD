@@ -11,10 +11,22 @@ class TaskListCreateView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
+        #tasks = Task.objects.filter(user=request.user)
+
+        #serializer = TaskSerializer(tasks, many=True)
+
+        #return Response(serializer.data, status=status.HTTP_200_OK)
         tasks = Task.objects.filter(user=request.user)
 
-        serializer = TaskSerializer(tasks, many=True)
+        completed = request.query_params.get('completed')
 
+        if completed is not None:
+            if completed.lower() == 'true':
+                tasks = tasks.filter(completed=True)
+            elif completed.lower() == 'false':
+                tasks = tasks.filter(completed=False)
+
+        serializer = TaskSerializer(tasks, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request):
