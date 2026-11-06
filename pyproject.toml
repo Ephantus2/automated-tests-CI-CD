@@ -1,6 +1,6 @@
 [tool.ruff]
 
-line-length = 88
+line-length = 94
 target-version = "py313"
 exclude = [
     "migrations",
