@@ -34,9 +34,7 @@ if not SECRET_KEY:
     if DEBUG:
         SECRET_KEY = "development-only-secret-key"
     else:
-        raise ImproperlyConfigured(
-            "DJANGO_SECRET_KEY must be sent in production"
-        )
+        raise ImproperlyConfigured("DJANGO_SECRET_KEY must be sent in production")
 
 ALLOWED_HOSTS = [
     host.strip()

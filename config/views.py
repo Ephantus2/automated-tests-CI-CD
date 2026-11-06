@@ -11,15 +11,9 @@ class HealthCheckView(View):
             with connection.cursor() as cursor:
                 cursor.execute("SELECT 1")
 
-            return JsonResponse({
-                "status": "healthy",
-                "database": "connected"
-            })
+            return JsonResponse({"status": "healthy", "database": "connected"})
 
         except DatabaseError:
-            return JsonResponse({
-                "status": "unhealthy",
-                "database": "unavailable"
-            },
-            status = 503
+            return JsonResponse(
+                {"status": "unhealthy", "database": "unavailable"}, status=503
             )

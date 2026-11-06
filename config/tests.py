@@ -4,18 +4,10 @@ from django.urls import reverse
 
 class HealthCheckTests(TestCase):
     def test_health_endpoint_returns_200(self):
-        response = self.client.get(
-            reverse("health-check")
-        )
+        response = self.client.get(reverse("health-check"))
 
         self.assertEqual(response.status_code, 200)
 
-        self.assertEqual(
-            response.json()["status"],
-            "healthy"
-        )
+        self.assertEqual(response.json()["status"], "healthy")
 
-        self.assertEqual(
-            response.json()["database"],
-            "connected"
-        )
+        self.assertEqual(response.json()["database"], "connected")
