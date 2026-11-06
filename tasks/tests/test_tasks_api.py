@@ -84,24 +84,15 @@ def test_user_cannot_create_task_without_title(authenticated_client):
 
     assert "title" in response.data
 
+
 def test_user_can_filter_completed_tasks(authenticated_client, user):
-    Task.objects.create(
-        title="Completed task",
-        user = user,
-        completed=True
-    )
+    Task.objects.create(title="Completed task", user=user, completed=True)
 
-    Task.objects.create(
-        title="Incomplete task",
-        user = user,
-        completed = False
-    )
+    Task.objects.create(title="Incomplete task", user=user, completed=False)
 
-    response = authenticated_client.get(
-        '/api/tasks/?completed=true'
-    )
+    response = authenticated_client.get("/api/tasks/?completed=true")
 
     assert response.status_code == 200
     assert len(response.data) == 1
-    assert response.data[0]["title"] == 'Completed task'
-    assert response.data[0]['completed'] is True
+    assert response.data[0]["title"] == "Completed task"
+    assert response.data[0]["completed"] is True
