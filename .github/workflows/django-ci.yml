@@ -1,5 +1,5 @@
 
-name: Django CI
+name: Django CI/CD
 
 on:
   push:
@@ -34,3 +34,16 @@ jobs:
 
       - name: Check code formatting
         run: ruff format --check .
+  
+  deploy:
+    needs: test
+    if: github.event_name == 'push' && github.ref == 'refs/head/main'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger Render deployment
+        env:
+          RENDER_DEPLOY_HOOK: ${{secrets.RENDER_DEPLOY_HOOK}}
+        run: |
+          curl --fail --silent --show-error \ --request POST \ "$RENDER_DEPLOY_HOOK"
