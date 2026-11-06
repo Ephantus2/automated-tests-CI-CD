@@ -23,23 +23,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv(
-    "DJANGO_SECRET_KEY",
-    "development-only-secret-key"
-)
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "development-only-secret-key")
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv(
-    "DJANGO_DEBUG", "True"
-).lower() == "true"
+DEBUG = os.getenv("DJANGO_DEBUG", "True").lower() == "true"
 
 ALLOWED_HOSTS = [
     host.strip()
-    for host in os.getenv(
-        "DJANGO_ALLOWED_HOSTS",
-        "127.0.0.1, localhost"
-    ).split(",")
+    for host in os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1, localhost").split(",")
 ]
 
 
@@ -96,7 +88,7 @@ DATABASES = {
     "default": dj_database_url.config(
         default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
         conn_max_age=600,
-        ssl_require=not DEBUG
+        ssl_require=not DEBUG,
     )
 }
 
@@ -136,14 +128,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = "static/"
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = BASE_DIR / "staticfiles"
 STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFileStorage"
-    }
+    "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFileStorage"},
 }
 
 # Default primary key field type
