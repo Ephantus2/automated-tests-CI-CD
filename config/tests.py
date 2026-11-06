@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 
+
 class HealthCheckTests(TestCase):
     def test_health_endpoint_returns_200(self):
         response = self.client.get(

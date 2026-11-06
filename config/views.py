@@ -1,6 +1,7 @@
-from django.db import connection, DatabaseError
+from django.db import DatabaseError, connection
 from django.http import JsonResponse
 from django.views import View
+
 
 class HealthCheckView(View):
     def get(self, request):
