@@ -31,7 +31,10 @@ DEBUG = os.getenv("DJANGO_DEBUG", "True").lower() == "true"
 
 ALLOWED_HOSTS = [
     host.strip()
-    for host in os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1, localhost").split(",")
+    for host in os.getenv(
+        "DJANGO_ALLOWED_HOSTS",
+        "127.0.0.1, localhost,  https://task-management-api-t0y6.onrender.com",
+    ).split(",")
 ]
 
 
