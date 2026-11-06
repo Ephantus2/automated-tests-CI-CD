@@ -1,0 +1,6 @@
+django
+djangorestframework
+psycopg[binary]
+djangorestframework-simplejwt
+pytest
+pytest-django
