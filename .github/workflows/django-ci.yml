@@ -28,3 +28,9 @@ jobs:
           
       - name: Run tests and measure coverage
         run: pytest --cov=tasks --cov-report=term-missing --cov-fail-under=70 -v
+      
+      - name: Check code quality
+        run: ruff check .
+
+      - name: Check code formatting
+        run: ruff format --check .
